@@ -4,6 +4,7 @@ go 1.16
 
 require (
 	github.com/btcsuite/btcutil v1.0.2 // indirect
+	github.com/gin-contrib/static v0.0.1 // indirect
 	github.com/gin-gonic/gin v1.7.7 // indirect
 	github.com/go-playground/validator/v10 v10.10.0 // indirect
 	github.com/go-redis/redis/v8 v8.11.4 // indirect

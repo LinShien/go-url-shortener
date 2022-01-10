@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 
 	"github.com/LinShien/go-url-shortener/handler"
 	"github.com/LinShien/go-url-shortener/storage"
+	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,17 +14,21 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 
-	router.GET("/", func(ctx *gin.Context) {
+	router.Use(static.Serve("/", static.LocalFile("./views", true)))
 
-		ctx.JSON(200, gin.H{
-			"message": "Welcome to the URL Shortener API ! " + ctx.ClientIP(),
+	api := router.Group("/api")
+	{
+		api.GET("/", func(ctx *gin.Context) {
+			ctx.JSON(http.StatusOK, gin.H{
+				"message": "pong",
+			})
 		})
-	})
+	}
 
 	storage.InitializeStorage()
 
-	router.POST("/create-short-url", handler.CreateShortUrlHandler)
-	router.GET("/:shortUrl", handler.ShortUrlRedirectHandler)
+	api.POST("/create-short-url", handler.CreateShortUrlHandler)
+	api.GET("/:shortUrl", handler.ShortUrlRedirectHandler)
 
 	err := router.Run(":9808")
 
