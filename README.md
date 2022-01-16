@@ -13,6 +13,11 @@ npm install @babel/core --dev-save
 npm install @babel/preset-react --save-dev
 npm install @babel/preset-env --save-dev
 npm install axios
+
+npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/icons-material
+npm install --save react@latest
+npm install react react-dom --save
 ```
 
 # 碰過的問題
